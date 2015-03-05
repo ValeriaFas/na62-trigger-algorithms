@@ -7,7 +7,7 @@
  */
 
 #include "TrbDecoder.h"
-#include "../cedar_algorithm/tdcb_buffer.h"
+#include "../rich_algorithm/tdcb_buffer.h"
 #include <options/Logging.h>
 #include <eventBuilding/Event.h>
 #include <l0/MEPFragment.h>
@@ -78,7 +78,7 @@ void TrbDecoder::SetHits(uint trbNum, l0::MEPFragment* trbDataFragment) {
 //	LOG_INFO << "Format " << ((int) cedarHeader->format) << ENDL;
 
 	for (int iFPGA = 0; iFPGA < maxNFPGAs; iFPGA++) {
-//		printf ("writing getpayload() + %d\n",1+iFPGA+nWords);
+		//printf ("writing getpayload() + %d\n",1+iFPGA+nWords);
 		fpgaHeader[iFPGA] = (FPGADataHeader*) payload + 1 + iFPGA + nWords;
 
 		noFrame[iFPGA] = (uint) fpgaHeader[iFPGA]->noFrame;
@@ -92,7 +92,7 @@ void TrbDecoder::SetHits(uint trbNum, l0::MEPFragment* trbDataFragment) {
 		//LOG_INFO<< "errFlags[" << iFPGA << "] " << errFlags[iFPGA] << ENDL;
 
 		for (int iFrame = 0; iFrame < maxNFrames; iFrame++) {
-//			printf ("writing getpayload() + %d\n",2+iFPGA+nWords);
+		//printf ("writing getpayload() + %d\n",2+iFPGA+nWords);
 			frameHeader[iFPGA][iFrame] = (FrameDataHeader*) payload + 2 + iFPGA
 					+ nWords;
 
@@ -100,7 +100,8 @@ void TrbDecoder::SetHits(uint trbNum, l0::MEPFragment* trbDataFragment) {
 					(uint16_t) frameHeader[iFPGA][iFrame]->coarseFrameTime;
 			nWordsPerFrame[iFPGA][iFrame] =
 					(uint) frameHeader[iFPGA][iFrame]->nWordsPerFrame;
-			nWords += (uint) frameHeader[iFPGA][iFrame]->nWordsPerFrame;
+//			nWords += (uint) frameHeader[iFPGA][iFrame]->nWordsPerFrame;
+			nWords += nWordsPerFrame[iFPGA][iFrame];
 
 			//LOG_INFO<< "FrameTimestamp[" << iFPGA << "][" << iFrame << "] " << std::hex << coarseFrameTime[iFPGA][iFrame] << std::dec << ENDL;
 			//LOG_INFO<< "nWordsPerFrame[" << iFPGA << "][" << iFrame << "] " << nWordsPerFrame[iFPGA][iFrame] << ENDL;
@@ -114,7 +115,7 @@ void TrbDecoder::SetHits(uint trbNum, l0::MEPFragment* trbDataFragment) {
 				//LOG_INFO<< "nhits " << nhits << ENDL;
 			if (nhits) {
 				for (uint ihit = 0; ihit < nhits; ihit++) {
-//					printf("writing getpayload() + %d\n",2 + iFPGA + nWords - nhits + ihit);
+					//printf("writing getpayload() + %d\n",2 + iFPGA + nWords - nhits + ihit);
 					tdc_data[ihit + nhits_tot] = (TrbData*) payload + 2 + iFPGA
 							+ nWords - nhits + ihit;
 

@@ -13,7 +13,8 @@
 #include <l0/MEPFragment.h>
 #include <l0/Subevent.h>
 
-#include "KtagAlgo.h"
+#include "RICHAlgo.h"
+
 
 namespace na62 {
 
@@ -39,7 +40,7 @@ uint8_t L1TriggerProcessor::compute(Event* event) {
 		return bypassTriggerWord;
 	}
 
-	uint8_t trigger = KtagAlgo::checkKtagTrigger(event);
+	uint8_t trigger = RICHAlgo::checkRICHTrigger(event);
 	if (trigger) {
 //		LOG_INFO << "event number = " << event->getEventNumber() << ENDL;
 //		LOG_INFO << "GOOD EVENT! " << ENDL;

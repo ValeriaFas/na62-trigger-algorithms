@@ -179,7 +179,7 @@ uint8_t KtagAlgo::checkKtagTrigger(Event* event) {
 			nSectors++;
 	}
 
-	LOG_INFO << event->getEventNumber() << "\t" << std::hex << event->getTimestamp() << std::dec <<  "\t" << nSectors << ENDL;
+	//LOG_INFO << event->getEventNumber() << "\t" << std::hex << event->getTimestamp() << std::dec <<  "\t" << nSectors << ENDL;
 
 	uint8_t kaontrigger = 0;
 
