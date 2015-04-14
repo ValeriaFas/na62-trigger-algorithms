@@ -4,7 +4,7 @@
  *  Created on: Mar 2, 2015
  *      Author: vfascian
  */
-#pragma
+#pragma once
 #ifndef RICHALGO_H_
 #define RICHALGO_H_
 
